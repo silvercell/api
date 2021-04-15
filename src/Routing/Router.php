@@ -90,6 +90,13 @@ class Router
     protected $prefix;
 
     /**
+     * All of the middleware groups.
+     *
+     * @var array
+     */
+    protected $middlewareGroups = [];
+
+    /**
      * Create a new router instance.
      *
      * @param \Dingo\Api\Contract\Routing\Adapter        $adapter
@@ -427,6 +434,18 @@ class Router
         }
 
         return array_merge_recursive(Arr::except($old, ['namespace', 'prefix', 'where', 'as']), $new);
+    }
+
+    /**
+     * Flush the router's middleware groups.
+     *
+     * @return $this
+     */
+    public function flushMiddlewareGroups()
+    {
+        $this->middlewareGroups = [];
+
+        return $this;
     }
 
     /**
